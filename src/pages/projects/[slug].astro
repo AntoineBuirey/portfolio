@@ -1,0 +1,90 @@
+---
+
+import { getCollection } from 'astro:content';
+import '../../styles/global.css';
+
+export async function getStaticPaths() {
+const projects = await getCollection('projects');
+return projects.map((project) => ({
+params: { slug: project.id },
+props: { project },
+}));
+}
+
+const { project } = Astro.props;
+const dateValue = project.data.date;
+const datePrecision = dateValue.length === 4 ? 'year' : dateValue.length === 7 ? 'month-year' : 'full';
+const dateForFormatting = datePrecision === 'year'
+    ? `${dateValue}-01-01`
+    : datePrecision === 'month-year'
+        ? `${dateValue}-01`
+        : dateValue;
+const dateOptions = {
+    ...(datePrecision !== 'year' && { month: 'long' }),
+    ...(datePrecision === 'full' && { day: 'numeric' }),
+    year: 'numeric',
+    timeZone: 'UTC',
+} as Intl.DateTimeFormatOptions;
+const formattedDate = new Intl.DateTimeFormat('fr-FR', dateOptions).format(new Date(`${dateForFormatting}T00:00:00Z`));
+
+---
+
+<html lang="fr" class="bg-slate-950 text-slate-100">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{project.data.title}</title>
+    </head>
+    <body class="min-h-screen bg-[radial-gradient(circle_at_top,#1e293b,#020617_55%)] px-6 py-10 sm:px-10 lg:px-16">
+        <main class="mx-auto max-w-5xl">
+            <a
+                href="/"
+                class="mb-16 inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition hover:text-cyan-300"
+            >
+                <span aria-hidden="true">&larr;</span>
+                Retour aux projets
+            </a>
+
+            <header class="max-w-3xl border-l-2 border-cyan-400 pl-6 sm:pl-8">
+                <p class="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300">Projet</p>
+                <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">{project.data.title}</h1>
+                <p class="mt-6 text-lg leading-8 text-slate-300">{project.data.description}</p>
+            </header>
+
+            <section class="mt-16 grid gap-5 border-y border-slate-800 py-8 sm:grid-cols-2 lg:grid-cols-4" aria-label="Informations du projet">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">Date</p>
+                    <p class="mt-2 text-sm text-slate-200">{formattedDate}</p>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">Technologies</p>
+                    <p class="mt-2 text-sm leading-6 text-slate-200">{project.data.technologies.join(' · ')}</p>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">Tags</p>
+                    <p class="mt-2 text-sm leading-6 text-slate-200">{project.data.tags.join(' · ')}</p>
+                </div>
+                {project.data.repository && (
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">Code source</p>
+                        <a
+                            href={project.data.repository}
+                            target="_blank"
+                            rel="noreferrer"
+                            class="mt-2 block truncate text-sm text-cyan-300 underline decoration-cyan-700 underline-offset-4 transition hover:text-cyan-200"
+                        >
+                            Voir le repository <span aria-hidden="true">&nearr;</span>
+                        </a>
+                    </div>
+                )}
+            </section>
+
+            <article class="prose prose-invert prose-slate mt-16 max-w-3xl prose-headings:text-white prose-a:text-cyan-300 prose-strong:text-slate-100">
+                <p>{project.body}</p>
+            </article>
+        </main>
+    </body>
+</html>
