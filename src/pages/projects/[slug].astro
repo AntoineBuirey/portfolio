@@ -1,7 +1,9 @@
 ---
 
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import '../../styles/global.css';
+
+import { processMdString } from '../md'
 
 export async function getStaticPaths() {
 const projects = await getCollection('projects');
@@ -12,6 +14,7 @@ props: { project },
 }
 
 const { project } = Astro.props;
+const { Content } = await render(project);
 const dateValue = project.data.date;
 const datePrecision = dateValue.length === 4 ? 'year' : dateValue.length === 7 ? 'month-year' : 'full';
 const dateForFormatting = datePrecision === 'year'
@@ -27,6 +30,7 @@ const dateOptions = {
 } as Intl.DateTimeFormatOptions;
 const formattedDate = new Intl.DateTimeFormat('fr-FR', dateOptions).format(new Date(`${dateForFormatting}T00:00:00Z`));
 
+
 ---
 
 <html lang="fr" class="bg-slate-950 text-slate-100">
@@ -38,7 +42,7 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', dateOptions).format(new D
         <meta name="generator" content={Astro.generator} />
         <title>{project.data.title}</title>
     </head>
-    <body class="min-h-screen bg-[radial-gradient(circle_at_top,#1e293b,#020617_55%)] px-6 py-10 sm:px-10 lg:px-16">
+    <body class="min-h-screen bg-slate-900 px-6 py-10 sm:px-10 lg:px-16">
         <main class="mx-auto max-w-5xl">
             <a
                 href="/"
@@ -83,7 +87,7 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', dateOptions).format(new D
             </section>
 
             <article class="prose prose-invert prose-slate mt-16 max-w-3xl prose-headings:text-white prose-a:text-cyan-300 prose-strong:text-slate-100">
-                <p>{project.body}</p>
+                <Content />
             </article>
         </main>
     </body>
