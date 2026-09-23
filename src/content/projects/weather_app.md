@@ -7,7 +7,7 @@ date: "2024"
 origin: "school"
 technologies: ["JavaScript", "Node.js", "API REST"]
 tags: ["web", "weather", "API", "OpenWeatherMap"]
-# repository: "https://github.com/ton-repo/projet"
+repository: "https://github.com/AntoineBuirey/weather-app"
 relatedLinks: [
     {
         name: "OpenWeatherMap API",
