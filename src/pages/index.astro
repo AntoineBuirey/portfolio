@@ -1,8 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
+import { formatDate } from "./formatter.ts";
 import '../styles/global.css';
 
-const allProjects = await getCollection('projects');
+import { OriginString, OriginColor } from './origin.ts';
+
+const allProjects = await getCollection('projects').then(
+	// sort projects by date in descending order
+	(projects) => projects.sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
+);
 ---
 
 <html lang="en">
@@ -17,14 +23,41 @@ const allProjects = await getCollection('projects');
 	<body class="min-h-screen bg-slate-900 px-6 py-10 sm:px-10 lg:px-16">
         <h1 class="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">Mes projets</h1>
 		<main class="mx-auto max-w-5xl mt-10"> 
-            <ul>
 				{allProjects.map((project) => (
-					<li class="mb-2 text-lg text-slate-200 hover:text-cyan-300">
-						<a href={`/projects/${project.id}/`}>{project.data.title}</a>
-						<p class="text-sm text-slate-400">{project.data.shortDescription}</p>
-					</li>
+					<article class="text-lg text-slate-200 hover:text-cyan-300 display: flex align-items: center min-h-30">
+						<div class="temporal-bar-item" style="
+							display: flex;
+							align-items: top;
+						">
+							<p class="ml-2 text-sm text-slate-400 text-right pr-2 pt-1.5 w-25">
+								{formatDate(project.data.date)}
+							</p>
+							<div class="temporal-bar-circle" style="
+								width: 14px;
+								height: 14px;
+								border-radius: 50%;
+								background-color: #ffffff;
+								position: relative;
+								margin-top: 0.75rem;
+								left: 8px;
+							"></div>
+							<div class="temporal-bar" style="
+								height: 100%;
+								border-left: 2px solid #ffffff;
+							"></div>
+						</div>
+						<div class="ml-4">
+							<span class={`ml-2 inline-flex w-18 justify-center rounded-full ${OriginColor[project.data.origin]} px-2 py-1 text-xs font-semibold text-slate-300`}>
+								{OriginString[project.data.origin]}
+							</span>
+							<a 
+								href={`/projects/${project.id}/`}
+								class="ml-2 text-lg font-semibold text-slate-200 transition hover:text-cyan-300"
+							>{project.data.title}</a>
+							<p class="ml-11 mt-2 mb-4 text-sm text-slate-400">{project.data.shortDescription}</p>
+						</div>
+					</article>
 				))}
-			</ul>
         </main>
     </body>
 </html>

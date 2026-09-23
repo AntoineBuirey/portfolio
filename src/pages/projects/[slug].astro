@@ -1,36 +1,24 @@
 ---
-
-import { getCollection, render } from 'astro:content';
-import '../../styles/global.css';
-
-import { processMdString } from '../md'
+import { getCollection, render } from "astro:content";
+import { formatDate } from "../formatter.ts";
+import { convertMarkdownToHTML } from "../body.ts";
+import "../../styles/global.css";
+import "../../styles/body.css";
+import "../../styles/themes/prism.css";
 
 export async function getStaticPaths() {
-const projects = await getCollection('projects');
-return projects.map((project) => ({
-params: { slug: project.id },
-props: { project },
-}));
+    const projects = await getCollection("projects");
+    return projects.map((project) => ({
+        params: { slug: project.id },
+        props: { project },
+    }));
 }
 
 const { project } = Astro.props;
-const { Content } = await render(project);
-const dateValue = project.data.date;
-const datePrecision = dateValue.length === 4 ? 'year' : dateValue.length === 7 ? 'month-year' : 'full';
-const dateForFormatting = datePrecision === 'year'
-    ? `${dateValue}-01-01`
-    : datePrecision === 'month-year'
-        ? `${dateValue}-01`
-        : dateValue;
-const dateOptions = {
-    ...(datePrecision !== 'year' && { month: 'long' }),
-    ...(datePrecision === 'full' && { day: 'numeric' }),
-    year: 'numeric',
-    timeZone: 'UTC',
-} as Intl.DateTimeFormatOptions;
-const formattedDate = new Intl.DateTimeFormat('fr-FR', dateOptions).format(new Date(`${dateForFormatting}T00:00:00Z`));
+// const { Content } = await render(project);
+const body = convertMarkdownToHTML(project.body || "");
 
-
+const formattedDate = formatDate(project.data.date);
 ---
 
 <html lang="fr" class="bg-slate-950 text-slate-100">
@@ -52,43 +40,132 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', dateOptions).format(new D
                 Retour aux projets
             </a>
 
-            <header class="max-w-3xl border-l-2 border-cyan-400 pl-6 sm:pl-8">
-                <p class="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300">Projet</p>
-                <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">{project.data.title}</h1>
-                <p class="mt-6 text-lg leading-8 text-slate-300">{project.data.description}</p>
+            <header class="max-w-4xl border-l-4 border-cyan-400 pl-6 sm:pl-8">
+                <p
+                    class="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300"
+                >
+                    Projet
+                </p>
+                <h1
+                    class="text-4xl font-bold tracking-tight text-white sm:text-6xl"
+                >
+                    {project.data.title}
+                </h1>
+                <p class="mt-6 text-lg leading-8 text-slate-300 sm:text-xl text-justify">
+                    {project.data.description}
+                </p>
             </header>
 
-            <section class="mt-16 grid gap-5 border-y border-slate-800 py-8 sm:grid-cols-2 lg:grid-cols-4" aria-label="Informations du projet">
+            <section
+                class="mt-16 grid gap-5 border-y border-slate-800 py-8 sm:grid-cols-2 lg:grid-cols-4"
+                aria-label="Informations du projet"
+            >
                 <div>
-                    <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">Date</p>
+                    <p
+                        class="text-xs font-semibold uppercase tracking-widest text-slate-500"
+                    >
+                        Date
+                    </p>
                     <p class="mt-2 text-sm text-slate-200">{formattedDate}</p>
                 </div>
                 <div>
-                    <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">Technologies</p>
-                    <p class="mt-2 text-sm leading-6 text-slate-200">{project.data.technologies.join(' · ')}</p>
+                    <p
+                        class="text-xs font-semibold uppercase tracking-widest text-slate-500"
+                    >
+                        Technologies
+                    </p>
+                    <p class="mt-2 text-sm leading-6 text-slate-200">
+                        {project.data.technologies.join(" · ")}
+                    </p>
                 </div>
                 <div>
-                    <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">Tags</p>
-                    <p class="mt-2 text-sm leading-6 text-slate-200">{project.data.tags.join(' · ')}</p>
+                    <p
+                        class="text-xs font-semibold uppercase tracking-widest text-slate-500"
+                    >
+                        Tags
+                    </p>
+                    <p class="mt-2 text-sm leading-6 text-slate-200">
+                        {project.data.tags.join(" · ")}
+                    </p>
                 </div>
-                {project.data.repository && (
-                    <div>
-                        <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">Code source</p>
-                        <a
-                            href={project.data.repository}
-                            target="_blank"
-                            rel="noreferrer"
-                            class="mt-2 block truncate text-sm text-cyan-300 underline decoration-cyan-700 underline-offset-4 transition hover:text-cyan-200"
-                        >
-                            Voir le repository <span aria-hidden="true">&nearr;</span>
-                        </a>
-                    </div>
-                )}
+                {
+                    project.data.repository && (
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">
+                                Code source
+                            </p>
+                            <a
+                                href={project.data.repository}
+                                target="_blank"
+                                rel="noreferrer"
+                                class="mt-2 block truncate text-sm text-cyan-300 underline decoration-cyan-700 underline-offset-4 transition hover:text-cyan-200"
+                            >
+                                Voir le repository{" "}
+                                <span aria-hidden="true">&nearr;</span>
+                            </a>
+                        </div>
+                    )
+                }
             </section>
 
-            <article class="prose prose-invert prose-slate mt-16 max-w-3xl prose-headings:text-white prose-a:text-cyan-300 prose-strong:text-slate-100">
-                <Content />
+            <article
+                class="prose prose-invert prose-slate mt-16 max-w-3xl prose-headings:text-white prose-a:text-cyan-300 prose-strong:text-slate-100"
+            >
+                <div set:html={body} class="body-container"></div>
             </article>
+
+            <section
+                class="mt-16 grid gap-5 border-y border-slate-800 py-8 sm:grid-cols-2 lg:grid-cols-4"
+                aria-label="related links"
+            >
+                {
+                    project.data.relatedLinks && project.data.relatedLinks.length > 0 && (
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">
+                                Liens relatifs
+                            </p>
+                            <ul class="mt-2 space-y-2">
+                                {project.data.relatedLinks.map((link) => (
+                                    <li>
+                                        <a
+                                            href={link.url}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            class="block truncate text-sm text-cyan-300 underline decoration-cyan-700 underline-offset-4 transition hover:text-cyan-200"
+                                        >
+                                            {link.name} <span aria-hidden="true">&nearr;</span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )
+                }
+                {
+                    project.data.relatedProjects && project.data.relatedProjects.length > 0 && (
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">
+                                Projets liés
+                            </p>
+                            <ul class="mt-2 space-y-2">
+                                {project.data.relatedProjects.map((link) => (
+                                    <li>
+                                        <a
+                                            href={"../"+link}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            class="block truncate text-sm text-cyan-300 underline decoration-cyan-700 underline-offset-4 transition hover:text-cyan-200"
+                                        >
+                                            {link} <span aria-hidden="true">&nearr;</span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )
+                }
+            </section>
         </main>
+        <script src="/script/prism.js" defer></script>
     </body>
 </html>
