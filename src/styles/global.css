@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+body {
+    color: #636466;
+}
+
+a:hover {
+    color: #608ABF;
+}
+
+.temporal-bar-circle { 
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #608ABF;
+    position: relative;
+    margin-top: 0.75rem;
+    left: 8px;
+}
+
+.temporal-bar{ 
+    height: 100%;
+	border-left: 2px solid #608ABF;
+}
+
+.temporal-bar-item {
+    display: flex;
+    align-items: top;
+}
+
+.origin-badge {
+    color: white;
+}

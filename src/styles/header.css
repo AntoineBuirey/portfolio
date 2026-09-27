@@ -1,0 +1,22 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 10rem;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    font-style: italic;
+}
+
+header a {
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+header a.active {
+    color: oklch(91.7% 0.08 205.041); /* Tailwind's cyan-200 */
+}
