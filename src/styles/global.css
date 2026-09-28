@@ -1,33 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 @import "tailwindcss";
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease-in-out;
+}
 
 body {
     color: #636466;
 }
 
-a:hover {
-    color: #608ABF;
+h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 2.5rem;
+    @media (min-width: 640px) {
+        font-size: 3rem;
+        line-height: 1;
+    }
 }
 
-.temporal-bar-circle { 
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background-color: #608ABF;
-    position: relative;
-    margin-top: 0.75rem;
-    left: 8px;
-}
+main {
+    margin-left: 4rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: calc(100vh - 10rem);
 
-.temporal-bar{ 
-    height: 100%;
-	border-left: 2px solid #608ABF;
-}
+    a {
+        margin-left: 0.5rem;
+        font-size: 1.125rem;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+            color: #608ABF;
+        }
+    }
 
-.temporal-bar-item {
-    display: flex;
-    align-items: top;
-}
+    article {
+        font-size: 1.125rem;
+        display: flex;
+        align-items: center;
+        min-height: 7.5rem;
+    }
 
-.origin-badge {
-    color: white;
+    embed {
+        width: 100%;
+        height: 100%;
+    }
 }

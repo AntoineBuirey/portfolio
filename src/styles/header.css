@@ -2,21 +2,41 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2rem 10rem;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
     text-align: center;
-}
+    background-color: #F7F7F7;
+    height: 8rem;
 
-header h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    font-style: italic;
-}
+    & > * {
+        width: 20%;
+        margin: 1rem;
+        min-width: 120px;
+        padding: 0.5rem;
+    }
 
-header a {
-    font-size: 1.5rem;
-    transition: color 0.3s ease;
-}
 
-header a.active {
-    color: oklch(91.7% 0.08 205.041); /* Tailwind's cyan-200 */
+
+    h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        min-width: 150px;
+    }
+
+    a {
+        font-size: 1.5rem;
+        transition: all 0.3s ease-in-out;
+        background-color: #636466;
+        border-radius: 0.5rem;
+        color: white;
+
+        &:hover {
+            color: white;
+            background-color: #608ABF;
+        }
+
+        &.active {
+            background-color: #608ABF;
+        }
+    }
 }

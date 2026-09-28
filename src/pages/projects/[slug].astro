@@ -1,9 +1,9 @@
 ---
 import { getCollection, render } from "astro:content";
-import { formatDate } from "../formatter.ts";
-import { convertMarkdownToHTML } from "../body.ts";
+import { formatDate } from "../../scripts/formatter.ts";
+import { convertMarkdownToHTML } from "../../scripts/md2html.ts";
 import "../../styles/global.css";
-import "../../styles/body.css";
+import "../../styles/body-container.css";
 import "../../styles/themes/prism.css";
 
 export async function getStaticPaths() {
@@ -33,7 +33,7 @@ const formattedDate = formatDate(project.data.date);
     <body class="min-h-screen bg-slate-900 px-6 py-10 sm:px-10 lg:px-16">
         <main class="mx-auto max-w-5xl">
             <a
-                href="/"
+                href="/projects"
                 class="mb-16 inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition hover:text-cyan-300"
             >
                 <span aria-hidden="true">&larr;</span>

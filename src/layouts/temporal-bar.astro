@@ -1,0 +1,15 @@
+---
+import "../styles/temporal-bar.css";
+
+import { formatDate } from "../scripts/formatter.ts";
+
+const { date } = Astro.props;
+---
+
+<div class="temporal-bar-item">
+    <p class="date">
+        {formatDate(date)}
+    </p>
+    <div class="temporal-bar-circle"></div>
+    <div class="temporal-bar"></div>
+</div>

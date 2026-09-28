@@ -1,0 +1,10 @@
+---
+import '../styles/origin_badge.css';
+
+import { OriginString } from '../scripts/origin.ts';
+
+const { origin } = Astro.props as { origin: keyof typeof OriginString };
+---
+<span class={`origin-badge ${origin} `}>
+    {OriginString[origin]}
+</span>

@@ -8,6 +8,6 @@ const { title, page } = Astro.props;
     <h1>{title}</h1>
     <a class={`nav-link ${page === 'home' ? 'active' : ''}`} href="/">Accueil</a>
     <a class={`nav-link ${page === 'projects' ? 'active' : ''}`} href="/projects">Projets</a>
-    <a class={`nav-link ${page === 'about' ? 'active' : ''}`} href="/cv">CV</a>
+    <a class={`nav-link ${page === 'cv' ? 'active' : ''}`} href="/cv">CV</a>
     <a class={`nav-link ${page === 'contact' ? 'active' : ''}`} href="/contact">Contact</a>
 </header>

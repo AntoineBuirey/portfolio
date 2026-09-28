@@ -1,0 +1,28 @@
+
+.origin-badge {
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &.personal {
+        background-color: #16A34A; /* Tailwind's green-700 */
+    }
+
+    &.school {
+        background-color: #1D4ED8; /* Tailwind's blue-700 */
+    }
+
+    &.internship {
+        background-color: #CA8A04; /* Tailwind's yellow-700 */
+    }
+    
+    &.work {
+        background-color: #B91C1C; /* Tailwind's red-700 */
+    }
+}
+

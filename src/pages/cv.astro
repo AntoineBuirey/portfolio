@@ -1,0 +1,25 @@
+---
+import '../styles/global.css';
+
+import Head from '../layouts/Head.astro';
+import Header from '../layouts/Header.astro';
+
+---
+
+<html lang="fr">
+	<Head/>
+	<body>
+		<Header title="Portfolio" page="cv" />
+		<main> 
+			<!-- <embed src="/cv.pdf" type="application/pdf" title="CV" /> -->
+			<object data="/cv.pdf" type="application/pdf" width="100%" height="600px">
+				 <p>
+					Your browser does not support PDFs.
+					<a href="/cv.pdf">
+						Download the PDF
+					</a>.
+				</p>
+			</object>
+        </main>
+    </body>
+</html>
