@@ -3,6 +3,8 @@ import '../styles/global.css';
 
 import Head from '../layouts/Head.astro';
 import Header from '../layouts/Header.astro';
+import PdfViewer from '../layouts/PdfViewer.astro';
+import Footer from '../layouts/Footer.astro';
 
 ---
 
@@ -10,16 +12,11 @@ import Header from '../layouts/Header.astro';
 	<Head/>
 	<body>
 		<Header title="Portfolio" page="cv" />
-		<main> 
-			<!-- <embed src="/cv.pdf" type="application/pdf" title="CV" /> -->
-			<object data="/cv.pdf" type="application/pdf" width="100%" height="600px">
-				 <p>
-					Your browser does not support PDFs.
-					<a href="/cv.pdf">
-						Download the PDF
-					</a>.
-				</p>
-			</object>
-        </main>
+		<div class="scrollable-zone">
+			<main> 
+				<PdfViewer src="/cv.pdf" download="true" />
+			</main>
+			<Footer/>
+		</div>
     </body>
 </html>

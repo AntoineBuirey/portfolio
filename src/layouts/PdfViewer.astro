@@ -1,0 +1,65 @@
+---
+import "../styles/PdfViewer.css";
+
+const { src, download } = Astro.props as { src: string; download?: boolean };
+
+const id = Math.random().toString(36).substring(2, 15);
+---
+<script define:vars={{ src, id }} type="module">
+    import * as pdfjsLib from "https://mozilla.github.io/pdf.js/build/pdf.mjs";
+
+    var url = src;
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://mozilla.github.io/pdf.js/build/pdf.worker.mjs";
+
+    // Asynchronous download of PDF
+    var loadingTask = pdfjsLib.getDocument({ url });
+    loadingTask.promise.then(function(pdf) {
+        console.log('PDF loaded');
+
+        // Fetch the first page
+        var pageNumber = 1;
+        pdf.getPage(pageNumber).then(function(page) {
+        console.log('Page loaded');
+
+        var scale = 1.5;
+        var viewport = page.getViewport({scale: scale});
+
+        // Prepare canvas using PDF page dimensions
+        var canvas = document.getElementById(id);
+        var context = canvas.getContext('2d');
+        // canvas.height = viewport.height;
+        // canvas.width = viewport.width;
+
+        var resolution =  2 ; // for example
+
+        canvas.height = resolution * viewport.height;
+        canvas.width  = resolution * viewport.width;
+
+        canvas.style.height = viewport.height;
+        canvas.style.width = viewport.width;
+
+        // Render PDF page into canvas context
+        var renderContext = {
+            canvasContext: context,
+            viewport: viewport,
+            transform: [resolution, 0, 0, resolution, 0, 0]
+        };
+        var renderTask = page.render(renderContext);
+        renderTask.promise.then(function () {
+            console.log('Page rendered');
+        });
+        });
+    }, function (reason) {
+        // PDF loading error
+        console.error(reason);
+    });
+</script>
+{
+    download ? (
+        <a href={src} download class="pdf-download">
+            Télécharger le CV
+        </a>
+    ) : null
+}
+<canvas class="pdf-canvas" id={id}></canvas>

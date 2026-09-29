@@ -1,0 +1,12 @@
+---
+import "../styles/markdown.css";
+
+import { convertMarkdownToHTML } from "../scripts/md2html.ts";
+
+const { content } = Astro.props;
+const body = convertMarkdownToHTML(content || "");
+
+---
+<article class="md-viewer-container">
+    <div set:html={body} class="md-viewer"></div>
+</article>

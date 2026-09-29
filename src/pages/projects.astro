@@ -5,6 +5,7 @@ import '../styles/global.css';
 import Header from '../layouts/Header.astro';
 import Head from '../layouts/Head.astro';
 import Card from '../layouts/card.astro';
+import Footer from '../layouts/Footer.astro';
 
 const allProjects = await getCollection('projects').then(
 	// sort projects by date in descending order
@@ -16,16 +17,19 @@ const allProjects = await getCollection('projects').then(
 	<Head/>
 	<body>
 		<Header title="Portfolio" page="projects" />
-		<main> 
-			{allProjects.map((project) => (
-				<Card
-					date={project.data.date}
-					origin={project.data.origin}
-					title={project.data.title}
-					shortDescription={project.data.shortDescription}
-					id={project.id}
-				/>
-			))}
-        </main>
+		<div class="scrollable-zone">
+			<main> 
+				{allProjects.map((project) => (
+					<Card
+						date={project.data.date}
+						origin={project.data.origin}
+						title={project.data.title}
+						shortDescription={project.data.shortDescription}
+						id={project.id}
+					/>
+				))}
+			</main>
+			<Footer/>
+        </div>
     </body>
 </html>

@@ -3,10 +3,9 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
-    margin-bottom: 2rem;
     text-align: center;
     background-color: #F7F7F7;
-    height: 8rem;
+    height: 6rem;
 
     & > * {
         width: 20%;
