@@ -9,6 +9,8 @@ import MdViewer from "../../layouts/MdViewer.astro";
 import Header from "../../layouts/Header.astro";
 import Head from "../../layouts/Head.astro";
 import Footer from "../../layouts/Footer.astro";
+import Label from "../../layouts/Label.astro";
+
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
@@ -28,121 +30,58 @@ const formattedDate = formatDate(project.data.date);
 		<Header title="Portfolio" page="projects" />
 		<div class="scrollable-zone">
             <main>
-                <a href="/projects">
-                    <span aria-hidden="true">&larr;</span>
-                    Retour aux projets
-                </a>    
-
-                <header class="project-header">
-                    <p class="project-kicker">
-                        Projet
-                    </p>
-                    <h2 class="project-title">
+                <div class="project-header">
+                    <h2>
                         {project.data.title}
                     </h2>
-                    <p class="project-description">
+                    <p>
                         {project.data.description}
                     </p>
-                </header>
+                </div>
 
-                <section
-                    class="project-meta"
-                    aria-label="Informations du projet"
-                >
-                    <div>
-                        <p class="project-label">
-                            Date
-                        </p>
-                        <p class="project-value">{formattedDate}</p>
-                    </div>
-                    <div>
-                        <p class="project-label">
-                            Technologies
-                        </p>
-                        <p class="project-value">
-                            {project.data.technologies.join(" · ")}
-                        </p>
-                    </div>
-                    <div>
-                        <p class="project-label">
-                            Tags
-                        </p>
-                        <p class="project-value">
-                            {project.data.tags.join(" · ")}
-                        </p>
-                    </div>
-                    {
-                        project.data.repository && (
-                            <div>
-                                <p class="project-label">
-                                    Code source
-                                </p>
-                                <a
-                                    href={project.data.repository}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    class="project-link project-link-truncated"
-                                >
-                                    Voir le repository{" "}
-                                    <span aria-hidden="true">&nearr;</span>
-                                </a>
-                            </div>
-                        )
-                    }
+                <section class="project-meta">
+                    <Label title="Date" value={formattedDate} />
+                    <Label title="Technologies" value={project.data.technologies} />
+                    <Label title="Tags" value={project.data.tags} />
+                    <Label 
+                        title="Code source"
+                        value="Voir le repository"
+                        link={project.data.repository}
+                        condition={project.data.repository !== undefined}
+                    /> 
                 </section>
 
                 <MdViewer content={project.body} />
 
-                <section
-                    class="project-meta project-related"
-                    aria-label="related links"
-                >
-                    {
-                        project.data.relatedLinks && project.data.relatedLinks.length > 0 && (
-                            <div>
-                                <p class="project-label">
-                                    Liens relatifs
-                                </p>
-                                <ul class="project-links-list">
-                                    {project.data.relatedLinks.map((link) => (
-                                        <li>
-                                            <a
-                                                href={link.url}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                class="project-link project-link-truncated"
-                                            >
-                                                {link.name} <span aria-hidden="true">&nearr;</span>
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )
-                    }
-                    {
-                        project.data.relatedProjects && project.data.relatedProjects.length > 0 && (
-                            <div>
-                                <p class="project-label">
-                                    Projets liés
-                                </p>
-                                <ul class="project-links-list">
-                                    {project.data.relatedProjects.map((link) => (
-                                        <li>
-                                            <a
-                                                href={"../"+link}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                class="project-link project-link-truncated"
-                                            >
-                                                {link} <span aria-hidden="true">&nearr;</span>
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )
-                    }
+                <section class="project-meta">
+                    <Label 
+                        title="Liens relatifs"
+                        value={project.data.relatedLinks?.map((link) => (
+                            <a
+                                href={link.url}
+                                target="_blank"
+                                rel="noreferrer"
+                                class="project-link project-link-truncated"
+                            >
+                                {link.name} <span aria-hidden="true">&nearr;</span>
+                            </a>
+                        ))}
+                        condition={project.data.relatedLinks && project.data.relatedLinks.length > 0}
+                    />
+                    <Label 
+                        title="Projets liés"
+                        value={project.data.relatedProjects?.map((link) => (
+                            <a
+                                href={"../"+link}
+                                target="_blank"
+                                rel="noreferrer"
+                                class="project-link project-link-truncated"
+                            >
+                                {link} <span aria-hidden="true">&nearr;</span>
+                            </a>
+                        ))}
+                        condition={project.data.relatedProjects && project.data.relatedProjects.length > 0}
+                    />
                 </section>
             </main>
             <Footer/>

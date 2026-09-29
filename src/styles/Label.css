@@ -1,0 +1,37 @@
+.label {
+    .title {
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-align: center;
+    }
+
+    .value {
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+
+    div.value {
+        font-size: 0.875rem;
+
+        .label-value {
+            background-color: #608ABF;
+            color: #FFFFFF;
+            padding: 0.25rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+    a.value {
+        .label-value {
+            border: 1px solid #608ABF;
+            color: #636466;
+            padding: 0.25rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+            font-weight: normal;
+        }
+    }
+}

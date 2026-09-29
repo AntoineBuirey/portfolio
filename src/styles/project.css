@@ -1,45 +1,26 @@
 
 .project-header {
-	max-width: 60rem;
-	padding-left: 1.25rem;
 	border-left: 0.25rem solid #608ABF;
+	margin-top: 3rem;
+	width: calc(100% - 5rem);
+
+	h2 {
+		margin: 0;
+		color: #636466;
+		font-size: 2.25rem;
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	p {
+		margin: 1.5rem 0 0;
+		color: #636466;
+		font-size: 1.125rem;
+		line-height: 2rem;
+		text-align: justify;
+	}
 }
 
-.project-kicker,
-.project-label {
-	color: #608ABF;
-	font-size: 0.75rem;
-	font-weight: 600;
-	text-transform: uppercase;
-}
-
-.project-kicker {
-	margin: 0 0 1rem;
-	letter-spacing: 0.25em;
-}
-
-.project-label {
-	margin: 0;
-	color: #636466;
-	letter-spacing: 0.1em;
-}
-
-.project-title {
-	margin: 0;
-	color: #636466;
-	font-size: 2.25rem;
-	font-weight: 700;
-	line-height: 1;
-	letter-spacing: -0.025em;
-}
-
-.project-description {
-	margin: 1.5rem 0 0;
-	color: #636466;
-	font-size: 1.125rem;
-	line-height: 2rem;
-	text-align: justify;
-}
 
 .project-meta {
 	display: grid;
@@ -58,15 +39,14 @@
 	line-height: 1.5rem;
 }
 
-.project-shell .project-link {
+.project-shell {
 	color: #608ABF;
 	text-decoration: underline;
 	text-decoration-color: #608ABF;
 	text-underline-offset: 0.25rem;
-	transition: color 0.3s ease-in-out;
 }
 
-.project-shell .project-link-truncated {
+.project-shell {
 	display: block;
 	overflow: hidden;
 	margin-top: 0.5rem;

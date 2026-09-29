@@ -4,7 +4,7 @@ title: "Collection de petits modules Python"
 shortDescription: "Une collection de cinq petits modules Python que j'ai créés et qui peuvent être utiles pour différents projets."
 description: "Cette collection de cinq petits modules Python que j'ai créés peut être utile pour différents projets. Chaque module est conçu pour accomplir une tâche spécifique et peut être utilisé indépendamment ou combiné avec d'autres modules selon les besoins du projet."
 date: "2025-04"
-origin: "school"
+origin: "personal"
 technologies: ["Python"]
 tags: ["utility", "modules", "python"]
 repository: "https://github.com/AntoineBuirey/python-sample"
