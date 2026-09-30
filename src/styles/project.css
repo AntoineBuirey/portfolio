@@ -69,7 +69,7 @@
 	margin-top: 0.5rem;
 }
 
-@media (min-width: 640px) {
+/* @media (min-width: 640px) {
 	.project-shell {
 		padding-right: 2.5rem;
 		padding-left: 2.5rem;
@@ -90,9 +90,9 @@
 	.project-meta {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
-}
+} */
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
 	.project-shell {
 		padding-right: 4rem;
 		padding-left: 4rem;
@@ -101,4 +101,4 @@
 	.project-meta {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
-}
+} */

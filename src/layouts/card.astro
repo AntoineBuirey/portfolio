@@ -8,11 +8,11 @@ const { date, origin, title, shortDescription, id } = Astro.props;
 ---
 <article class="project-card">
     <TempBar date={date}/>
-    <div>
+    <div class="card-content">
         <OriginBadge origin={origin}/>
         <a class="title" href={`/projects/${id}/`}>
             {title}
         </a>
-        <p class="ml-11 mt-2 mb-4 text-sm text-slate-400">{shortDescription}</p>
+        <p class="description">{shortDescription}</p>
     </div>
 </article>

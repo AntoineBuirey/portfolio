@@ -10,6 +10,8 @@ const OriginString = {
 
 const { origin } = Astro.props as { origin: keyof typeof OriginString };
 ---
-<span class={`origin-badge ${origin} `}>
-    {OriginString[origin]}
-</span>
+<div class="origin-badge-container">
+	<span class={`origin-badge ${origin} `}>
+		{OriginString[origin]}
+	</span>
+</div>

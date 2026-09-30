@@ -3,7 +3,6 @@
     display: flex;
     align-items: center;
 
-
     .date {
         margin-left: 0.5rem;
         font-size: 0.875rem;
@@ -26,5 +25,27 @@
     .temporal-bar{ 
         height: 120px;
         border-left: 2px solid #608ABF;
+    }
+}
+
+@media (max-width: 768px) {
+    .temporal-bar-item {
+
+        .date {
+            width: 4.5rem;
+            font-size: 0.75rem;
+        }
+
+        .temporal-bar-circle { 
+            width: 10px;
+            height: 10px;
+            left: calc(-6rem + 6px);
+            position: relative;
+        }
+
+        .temporal-bar{ 
+            position: relative;
+            left: -6rem;
+        }
     }
 }

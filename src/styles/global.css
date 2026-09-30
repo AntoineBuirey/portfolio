@@ -2,6 +2,8 @@
 
 @import "tailwindcss";
 
+@import "./main.css";
+
 * {
     font-family: 'Montserrat', sans-serif;
     transition: all 0.3s ease-in-out;
@@ -15,10 +17,6 @@ h1 {
     font-size: 2.25rem;
     font-weight: 700;
     line-height: 2.5rem;
-    @media (min-width: 640px) {
-        font-size: 3rem;
-        line-height: 1;
-    }
 }
 
 .scrollable-zone {
@@ -27,40 +25,9 @@ h1 {
     height: calc(100vh - 6rem);
 }
 
-main {
-    margin-left: 8rem;
-    margin-right: 4rem;
-    min-height: calc(100vh - 10rem);
-    a {
-        display: inline-block;
-        font-size: 1.1rem;
-        transition: all 0.3s ease-in-out;
-        text-decoration: underline;
-
-        & > span {
-                font-weight: bold;
-            }
-
-        &:hover {
-            color: #608ABF;
-            font-weight: bold;
-        }
-    }
-
-    article {
-        font-size: 1.125rem;
-        display: flex;
-        align-items: center;
-        min-height: 7.5rem;
-    }
-
-    embed {
-        width: 100%;
-        height: 100%;
-    }
-
-    p {
-        text-align: justify;
-        margin-bottom: 1rem;
+@media screen and (max-width: 768px) {
+    .scrollable-zone {
+        height: calc(100vh - 9rem);
     }
 }
+
