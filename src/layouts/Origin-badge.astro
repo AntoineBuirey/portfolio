@@ -1,7 +1,12 @@
 ---
 import '../styles/origin_badge.css';
 
-import { OriginString } from '../scripts/origin.ts';
+const OriginString = {
+	personal: 'Personnel',
+	school: 'Scolaire',
+	internship: 'Stage',
+	work: 'Travail',
+};
 
 const { origin } = Astro.props as { origin: keyof typeof OriginString };
 ---

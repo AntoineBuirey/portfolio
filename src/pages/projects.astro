@@ -16,7 +16,7 @@ const allProjects = await getCollection('projects').then(
 <html lang="fr">
 	<Head/>
 	<body>
-		<Header title="Portfolio" page="projects" />
+		<Header page="projects" />
 		<div class="scrollable-zone">
 			<main> 
 				{allProjects.map((project) => (

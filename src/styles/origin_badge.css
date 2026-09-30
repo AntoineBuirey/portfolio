@@ -8,21 +8,26 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-width: 5rem;
 
     &.personal {
-        background-color: #16A34A; /* Tailwind's green-700 */
+        border: 2px solid #608ABF;
+        color: #608ABF;
     }
 
     &.school {
-        background-color: #1D4ED8; /* Tailwind's blue-700 */
+        border: 2px solid #60bf71;
+        color: #60bf71;
     }
 
     &.internship {
-        background-color: #CA8A04; /* Tailwind's yellow-700 */
+        border: 2px solid #bf8860;
+        color: #bf60af;
     }
     
     &.work {
-        background-color: #B91C1C; /* Tailwind's red-700 */
+        border: 2px solid #bf6060;
+        color: #bf6060;
     }
 }
 

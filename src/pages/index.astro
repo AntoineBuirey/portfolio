@@ -4,15 +4,32 @@ import '../styles/global.css';
 import Head from '../layouts/Head.astro';
 import Header from '../layouts/Header.astro';
 import Footer from '../layouts/Footer.astro';
+import Vspace from '../layouts/Vspace.astro';
 ---
 
 <html lang="fr">
 	<Head/>
 	<body>
-		<Header title="Portfolio" page="home" />
+		<Header page="home" />
 		<div class="scrollable-zone">
 			<main> 
-				<h1>Qui suis-je ?</h1>
+				<Vspace/>
+				<h1>Antoine Buirey</h1>
+				<p>Etudiant en 2<sup>e</sup> année de Master Informatique à l'Université d'Avignon.</p>
+				<Vspace/>
+				<p>
+					Bienvenue sur mon portfolio ! Vous trouverez ici des informations sur mon parcours académique, mes compétences techniques, ainsi que les projets sur lesquels j'ai travaillé.
+					Vous pouvez également consulter mon CV et me contacter pour toute opportunité professionnelle.
+				</p>
+				<Vspace/>
+				<p>
+					Actuellement en 2<sup>e</sup> et dernière année de Master Informatique au CERI
+					(Centre d'Etudes et de Recherche en Informatique) de l'Université d'Avignon,
+					je recherche un stage de fin d'études d'une durée de 6 mois à compter du 18 janvier 2026 pour valider mon diplôme.
+					Je suis particulièrement intéressé par les domaines du développement logiciel, de l'innovation,
+					de l'automatisation, ainsi que par les technologies de virtualisation.
+
+				</p>
         	</main>
 			<Footer/>
 		</div>

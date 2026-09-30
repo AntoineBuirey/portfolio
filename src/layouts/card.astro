@@ -1,14 +1,16 @@
 ---
+import "../styles/card.css";
+
 import TempBar from './temporal-bar.astro';
 import OriginBadge from './Origin-badge.astro';
 
 const { date, origin, title, shortDescription, id } = Astro.props;
 ---
-<article>
+<article class="project-card">
     <TempBar date={date}/>
-    <div class="ml-4">
+    <div>
         <OriginBadge origin={origin}/>
-        <a href={`/projects/${id}/`}>
+        <a class="title" href={`/projects/${id}/`}>
             {title}
         </a>
         <p class="ml-11 mt-2 mb-4 text-sm text-slate-400">{shortDescription}</p>

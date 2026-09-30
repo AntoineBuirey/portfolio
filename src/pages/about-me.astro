@@ -3,19 +3,19 @@ import '../styles/global.css';
 
 import Head from '../layouts/Head.astro';
 import Header from '../layouts/Header.astro';
-import PdfViewer from '../layouts/PdfViewer.astro';
 import Footer from '../layouts/Footer.astro';
-
+import Vspace from '../layouts/Vspace.astro';
 ---
 
 <html lang="fr">
 	<Head/>
 	<body>
-		<Header page="cv" />
+		<Header page="about-me" />
 		<div class="scrollable-zone">
+			<Vspace/>
 			<main> 
-				<PdfViewer src="/cv.pdf" download="true" />
-			</main>
+				<h1>Qui suis-je ?</h1>
+        	</main>
 			<Footer/>
 		</div>
     </body>

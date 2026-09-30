@@ -1,0 +1,8 @@
+.project-card {
+    & > div {
+        margin-left: 1rem;
+        & > a.title {
+            margin-left: 1rem;
+        }
+    }
+}

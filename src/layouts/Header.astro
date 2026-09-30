@@ -1,13 +1,19 @@
 ---
 import "../styles/header.css";
 
-const { title, page } = Astro.props;
+import Hspace from './Hspace.astro';
+
+const { page } = Astro.props;
 ---
 
 <header>
-    <h1>{title}</h1>
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" class="triangle">
+        <polygon points="0,0 100,0 0,100" fill="#608ABF" />
+    </svg>
+    <Hspace/>
+    <h1>Portfolio</h1>
     <a class={`nav-link ${page === 'home' ? 'active' : ''}`} href="/">Accueil</a>
+    <!-- <a class={`nav-link ${page === 'about-me' ? 'active' : ''}`} href="/about-me">A propos</a> -->
     <a class={`nav-link ${page === 'projects' ? 'active' : ''}`} href="/projects">Projets</a>
     <a class={`nav-link ${page === 'cv' ? 'active' : ''}`} href="/cv">CV</a>
-    <a class={`nav-link ${page === 'contact' ? 'active' : ''}`} href="/contact">Contact</a>
 </header>
