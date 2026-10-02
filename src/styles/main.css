@@ -1,6 +1,8 @@
 main {
     margin-left: 10%;
     margin-right: 10%;
+    flex: 1 0 auto;
+
     a {
         display: inline-block;
         font-size: 1.1rem;
@@ -37,11 +39,5 @@ main {
 @media screen and (max-width: 768px) {
     main {
         margin-right: 5%;
-    }
-}
-
-@media screen and (min-width: 769px) {
-    main {
-        flex: 1 0 auto;
     }
 }
