@@ -9,10 +9,12 @@ const { date, origin, title, shortDescription, id } = Astro.props;
 <article class="project-card">
     <TempBar date={date}/>
     <div class="card-content">
-        <OriginBadge origin={origin}/>
-        <a class="title" href={`/projects/${id}/`}>
-            {title}
-        </a>
+        <div class="title-row">
+            <OriginBadge origin={origin}/>
+            <a class="title" href={`/projects/${id}/`}>
+                {title}
+            </a>
+        </div>
         <p class="description">{shortDescription}</p>
     </div>
 </article>
