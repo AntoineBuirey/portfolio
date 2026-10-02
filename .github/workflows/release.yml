@@ -47,6 +47,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Add Google site verification file
+        shell: bash
+        env:
+          VERIFICATION_FILENAME: ${{ secrets.GOOGLE_VERIFICATION_FILENAME }}
+          VERIFICATION_CONTENT: ${{ secrets.GOOGLE_VERIFICATION_CONTENT }}
+        run: |
+          if [[ -z "$VERIFICATION_FILENAME" || -z "$VERIFICATION_CONTENT" ]]; then
+            echo "Google verification secrets are not configured; skipping verification file."
+            exit 0
+          fi
+
+          if [[ "$VERIFICATION_FILENAME" == */* || "$VERIFICATION_FILENAME" == .* ]]; then
+            echo "GOOGLE_VERIFICATION_FILENAME must be a file name at the public root." >&2
+            exit 1
+          fi
+
+          printf '%s\n' "$VERIFICATION_CONTENT" > "public/$VERIFICATION_FILENAME"
+
       - name: Build application
         run: npm run build
 
