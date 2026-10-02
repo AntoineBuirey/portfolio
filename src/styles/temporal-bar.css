@@ -10,6 +10,8 @@
         padding-right: 0.5rem;
         width: 6.25rem;
         margin-bottom: 0;
+        top: -1.5rem;
+        position: relative;
     }
 
     .temporal-bar-circle { 
