@@ -2,13 +2,27 @@
 
 
 const { page } = Astro.props as { page: string };
+const description = "Portfolio d'Antoine Buirey : projets, compétences, parcours et expériences en informatique.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://antoinebuirey.fr');
+const socialImageUrl = new URL('/favicon.svg', canonicalUrl);
 ---
 
 <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Antoine Buirey - Portfolio" />
+    <meta property="og:title" content={`Portfolio - ${page}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:alt" content="Logo du portfolio d'Antoine Buirey" />
     <title>Portfolio - {page}</title>
 </head>
