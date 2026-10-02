@@ -93,13 +93,13 @@ GOOGLE_VERIFICATION_FILENAME=google-site-verification=abc123.html
 GOOGLE_VERIFICATION_CONTENT=google-site-verification: abc123...
 ```
 
-During the build, the workflow temporarily creates this file in `public/`.
-Astro copies it to the root of `dist/`, where it is deployed with the rest of
-the site. If either secret is missing, the verification step is skipped and
-the build continues normally.
+After synchronizing the compiled site, the workflow writes this file directly
+to the root of `SERVER_PATH` over the existing SSH connection. It is therefore
+not included in `dist/` or in the release archive. If either secret is missing,
+the verification step is skipped and the deployment continues normally.
 
-The file name must be a simple file name at the root of `public/`; subdirectories
-and hidden file names are rejected.
+The file name must be a simple file name written at the root of `SERVER_PATH`;
+subdirectories and hidden file names are rejected.
 
 For the complete server and environment setup, see the
 [CI/CD configuration guide](./.github/workflows/README.md).

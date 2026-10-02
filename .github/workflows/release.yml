@@ -47,24 +47,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Add Google site verification file
-        shell: bash
-        env:
-          VERIFICATION_FILENAME: ${{ secrets.GOOGLE_VERIFICATION_FILENAME }}
-          VERIFICATION_CONTENT: ${{ secrets.GOOGLE_VERIFICATION_CONTENT }}
-        run: |
-          if [[ -z "$VERIFICATION_FILENAME" || -z "$VERIFICATION_CONTENT" ]]; then
-            echo "Google verification secrets are not configured; skipping verification file."
-            exit 0
-          fi
-
-          if [[ "$VERIFICATION_FILENAME" == */* || "$VERIFICATION_FILENAME" == .* ]]; then
-            echo "GOOGLE_VERIFICATION_FILENAME must be a file name at the public root." >&2
-            exit 1
-          fi
-
-          printf '%s\n' "$VERIFICATION_CONTENT" > "public/$VERIFICATION_FILENAME"
-
       - name: Build application
         run: npm run build
 
@@ -113,6 +95,32 @@ jobs:
             -e "ssh -i $HOME/.ssh/deploy_key -p $SERVER_PORT" \
             build/dist/ \
             "${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_PATH }}/"
+
+      - name: Write Google site verification file
+        shell: bash
+        env:
+          VERIFICATION_FILENAME: ${{ secrets.GOOGLE_VERIFICATION_FILENAME }}
+          VERIFICATION_CONTENT: ${{ secrets.GOOGLE_VERIFICATION_CONTENT }}
+          SERVER_PATH: ${{ secrets.SERVER_PATH }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          if [[ -z "$VERIFICATION_FILENAME" || -z "$VERIFICATION_CONTENT" ]]; then
+            echo "Google verification secrets are not configured; skipping verification file."
+            exit 0
+          fi
+
+          if [[ ! "$VERIFICATION_FILENAME" =~ ^[A-Za-z0-9._=-]+$ ]]; then
+            echo "GOOGLE_VERIFICATION_FILENAME must be a simple file name at the server root." >&2
+            exit 1
+          fi
+
+          remote_path="${SERVER_PATH%/}/$VERIFICATION_FILENAME"
+          printf '%s\n' "$VERIFICATION_CONTENT" | ssh \
+            -i "$HOME/.ssh/deploy_key" \
+            -p "$SERVER_PORT" \
+            "$SERVER_USER@$SERVER_HOST" \
+            "cat > \"$remote_path\""
 
       - name: Attach compiled files to release
         uses: softprops/action-gh-release@v2
