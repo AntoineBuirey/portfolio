@@ -9,4 +9,5 @@ const body = convertMarkdownToHTML(content || "");
 ---
 <article class="md-viewer-container">
     <div set:html={body} class="md-viewer"></div>
+    <script src="/script/prism.js" defer></script>
 </article>

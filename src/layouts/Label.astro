@@ -1,32 +1,20 @@
 ---
 import "../styles/Label.css";
 
-const { title, value, link, condition } = Astro.props as {
+const { title, condition } = Astro.props as {
     title: string;
-    value: string | Array<string>;
-    link?: string;
     condition?: boolean;
 };
 
-let displayValue: string;
-
-if (Array.isArray(value)) {
-    displayValue = "<span class='label-value'>" + value.join("</span><span class='label-value'>") + "</span>";
-} else {
-    displayValue = "<span class='label-value'>" + value + "</span>";
-}
-
+console.log(`Label: ${title}, condition: ${condition}`);
 ---
-{(condition === undefined || condition) ? (
+{(condition == undefined || condition) ? (
     <div class="label">
         <p class="title">
             {title}
         </p>
-        
-        {link ? (
-            <a   class="value" set:html={displayValue} href={link} target="_blank" rel="noreferrer"></a>
-        ) : (
-            <div class="value" set:html={displayValue}></div>
-        )}
+        <div class="values">
+            <slot />
+        </div>
     </div>
 ) : null}

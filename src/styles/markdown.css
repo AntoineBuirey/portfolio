@@ -5,6 +5,9 @@
     margin-right: auto;
 
     .md-viewer {
+        width: 100%;
+        text-align: justify;
+
         h1 {
             font-size: 2rem;
             font-weight: bold;
@@ -33,6 +36,7 @@
 
         a {
             color: #608ABF;
+            font-size: inherit;
 
             &:hover {
                 color: #608ABF;
@@ -75,5 +79,11 @@
             color: #6b7280;
             font-style: italic;
         }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .md-viewer-container {
+        font-size: 0.875rem;
     }
 }

@@ -10,6 +10,7 @@ import Header from "../../layouts/Header.astro";
 import Head from "../../layouts/Head.astro";
 import Footer from "../../layouts/Footer.astro";
 import Label from "../../layouts/Label.astro";
+import LabelItem from "../../layouts/LabelItem.astro";
 
 
 export async function getStaticPaths() {
@@ -23,6 +24,8 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 
 const formattedDate = formatDate(project.data.date);
+
+console.log(project.data);
 ---
 <html lang="fr">
 	<Head/>
@@ -40,52 +43,40 @@ const formattedDate = formatDate(project.data.date);
                 </div>
 
                 <section class="project-meta">
-                    <Label title="Date" value={formattedDate} />
-                    <Label title="Technologies" value={project.data.technologies} />
-                    <Label title="Tags" value={project.data.tags} />
-                    <Label 
-                        title="Code source"
-                        value="Voir le repository"
-                        link={project.data.repository}
-                        condition={project.data.repository !== undefined}
-                    /> 
+                    <Label title="Date">
+                        <LabelItem text={formattedDate} />
+                    </Label>
+                    <Label title="Technologies">
+                        {project.data.technologies?.map((tech) => (
+                            <LabelItem text={tech} />
+                        ))}
+                    </Label>
+                    <Label title="Type">
+                        {project.data.tags?.map((tag) => (
+                            <LabelItem text={tag} />
+                        ))}
+                    </Label>
+                    <Label title="Code source" condition={project.data.repository !== undefined}>
+                        <LabelItem text="Voir le repository" link={project.data.repository} />
+                    </Label>
                 </section>
 
                 <MdViewer content={project.body} />
 
                 <section class="project-meta">
-                    <Label 
-                        title="Liens relatifs"
-                        value={project.data.relatedLinks?.map((link) => (
-                            <a
-                                href={link.url}
-                                target="_blank"
-                                rel="noreferrer"
-                                class="project-link project-link-truncated"
-                            >
-                                {link.name} <span aria-hidden="true">&nearr;</span>
-                            </a>
+                    <Label title="Liens relatifs" condition={project.data.relatedLinks !== undefined && project.data.relatedLinks.length > 0}>
+                        {project.data.relatedLinks?.map((link) => (
+                            <LabelItem text={link.name} link={link.url} />
                         ))}
-                        condition={project.data.relatedLinks && project.data.relatedLinks.length > 0}
-                    />
-                    <Label 
-                        title="Projets liés"
-                        value={project.data.relatedProjects?.map((link) => (
-                            <a
-                                href={"../"+link}
-                                target="_blank"
-                                rel="noreferrer"
-                                class="project-link project-link-truncated"
-                            >
-                                {link} <span aria-hidden="true">&nearr;</span>
-                            </a>
+                    </Label>
+                    <Label title="Projets liés" condition={project.data.relatedProjects !== undefined && project.data.relatedProjects.length > 0}>
+                        {project.data.relatedProjects?.map((link) => (
+                            <LabelItem text={link} link={"../"+link} />
                         ))}
-                        condition={project.data.relatedProjects && project.data.relatedProjects.length > 0}
-                    />
+                    </Label>
                 </section>
             </main>
             <Footer/>
         </div>
-        <script src="/script/prism.js" defer></script>
     </body>
 </html>
