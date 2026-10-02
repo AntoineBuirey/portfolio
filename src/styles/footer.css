@@ -23,9 +23,13 @@ footer {
 
 @media screen and (max-width: 768px) {
     footer {
-        display: flex;
+        /* display: flex;
         flex-direction: row;
-        justify-content:space-between;
+        justify-content:space-around; */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+        font-size: 0.9rem;
         
         &> * {
             margin: 0 0.5rem;

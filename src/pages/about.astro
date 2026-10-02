@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+
+import Head from '../layouts/Head.astro';
+import Header from '../layouts/Header.astro';
+import Footer from '../layouts/Footer.astro';
+
+import { version as project_version } from '../../package.json';
+import { version as node_version } from 'node:process';
+import { version as astro_version } from 'astro/package.json';
+import { version as vite_version } from 'vite/package.json';
+---
+
+<html lang="fr">
+	<Head/>
+	<body>
+		<Header page="about" />
+		<div class="scrollable-zone">
+			<main>
+				<h1>À propos</h1>
+
+				<section>
+					<h2>Mentions légales</h2>
+					<p>
+						Ce site est un portfolio personnel présentant les projets, les compétences
+						et le parcours d'Antoine Buirey.
+					</p>
+
+					<h3>Éditeur du site</h3>
+					<p>
+						<strong>Antoine Buirey</strong><br />
+						Contact : <a href="mailto:antoine.buirey@gmail.com">antoine.buirey@gmail.com</a>
+					</p>
+
+					<h3>Hébergement</h3>
+					<p>
+						Le site est déployé sur un serveur privé administré par l'éditeur.
+						Pour toute question concernant l'hébergement, l'éditeur peut être contacté
+						à l'adresse indiquée ci-dessus.
+					</p>
+
+					<h3>Propriété intellectuelle</h3>
+					<p>
+						Sauf indication contraire, les textes, la structure et les éléments graphiques
+						de ce site sont la propriété d'Antoine Buirey. Toute reproduction ou
+						représentation sans autorisation préalable est interdite.
+					</p>
+				</section>
+
+				<section>
+					<h2>Technologies et versions</h2>
+					<p>
+						Ce site est un projet statique construit avec les outils suivants :
+					</p>
+					<ul>
+						<li><strong>Projet :</strong> Portfolio <code>{project_version}</code></li>
+						<li><strong>Node.js :</strong> <code>{node_version}</code></li>
+						<li><strong>Astro :</strong> <code>{astro_version}</code></li>
+						<li><strong>Vite :</strong> <code>{vite_version}</code></li>
+						<li><strong>Déploiement :</strong> génération statique avec <code>astro build</code></li>
+                        <li><strong>Distribution :</strong> hébergement sur serveur privé, avec nginx</li>
+					</ul>
+					<p>
+						Le code source du portfolio est disponible sur
+						<a href="https://github.com/AntoineBuirey/portfolio" target="_blank" rel="noopener noreferrer">
+							GitHub
+						</a>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Données personnelles</h2>
+					<p>
+						Ce site ne propose pas de formulaire et ne collecte pas volontairement de
+						données personnelles. Un clic sur le lien de contact ouvre le logiciel de
+						messagerie du visiteur.
+					</p>
+				</section>
+			</main>
+			<Footer/>
+		</div>
+	</body>
+</html>
