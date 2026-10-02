@@ -4,6 +4,7 @@ footer {
     align-items: center;
     padding: 1rem;
     background-color: #f7f7f7;
+    height: 4rem;
 
     & > * {
         display: flex;

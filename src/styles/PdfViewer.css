@@ -11,3 +11,9 @@
     color: #007bff;
     text-decoration: none;
 }
+
+@media (max-width: 768px) {
+    .pdf-canvas {
+        width: 100%;
+    }
+}

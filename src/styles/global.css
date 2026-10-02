@@ -11,6 +11,8 @@
 
 body {
     color: #636466;
+    overflow-y: hidden;
+    height: 100vh;
 }
 
 h1 {
@@ -20,9 +22,10 @@ h1 {
 }
 
 .scrollable-zone {
-    overflow-x: hidden;
     overflow-y: scroll;
     height: calc(100vh - 6rem);
+    /* height: 100%; */
+    
 }
 
 @media screen and (max-width: 768px) {
