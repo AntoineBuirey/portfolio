@@ -1,0 +1,28 @@
+---
+import '../styles/global.css';
+
+import Head from '../layouts/Head.astro';
+import Header from '../layouts/Header.astro';
+import Footer from '../layouts/Footer.astro';
+---
+
+<html lang="fr">
+	<Head page="Page introuvable" />
+	<body>
+		<Header page="" />
+		<div class="scrollable-zone">
+			<main>
+				<h1>Page introuvable</h1>
+				<p>
+					Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
+				</p>
+				<p>
+					<a href="/">Retourner à l'accueil</a>
+					&nbsp;ou&nbsp;
+					<a href="/projects">consulter les projets</a>.
+				</p>
+			</main>
+			<Footer/>
+		</div>
+	</body>
+</html>
