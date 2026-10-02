@@ -43,7 +43,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
-	/* center items */
 
 	gap: 1.25rem;
 	margin-top: 3rem;
