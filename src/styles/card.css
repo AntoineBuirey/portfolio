@@ -3,6 +3,7 @@
     grid-template-columns: 1fr 50fr;
 
     & > .card-content {
+        margin-top: 1rem;   
         margin-left: 1rem;
         & > .title-row {
             display: flex;
