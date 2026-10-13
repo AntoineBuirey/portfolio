@@ -1,10 +1,11 @@
 ---
 import "../styles/markdown.css";
 
-import { convertMarkdownToHTML } from "../scripts/md2html.ts";
+import pkg from '@syncfusion/ej2-markdown-converter';
+const {MarkdownConverter} = pkg;
 
 const { content } = Astro.props;
-const body = convertMarkdownToHTML(content || "");
+const body = MarkdownConverter.toHtml(content || "");
 
 ---
 <article class="md-viewer-container">

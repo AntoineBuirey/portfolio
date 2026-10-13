@@ -65,11 +65,17 @@
             background-color: inherit !important;
         }
 
-        img {
-            max-width: 90%;
+        figure {
+            max-width: 80%;
+            margin-left: 10%;   
             height: auto;
             margin-bottom: 1rem;
 
+            &>figcaption {
+                text-align: center;
+                font-size: 0.875rem;
+                color: #6b7280;
+            }
         }
 
         blockquote {
