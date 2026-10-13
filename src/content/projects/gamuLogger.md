@@ -76,15 +76,9 @@ from gamuLogger import Logger, Levels
 
 Logger.set_level("stdout", Levels.INFO); # Cela signifie que tous les logs avec un niveau supérieur à INFO seront ignorés
 
-
 Logger.set_module('my-module'); # Définit le nom du module pour ce fichier à 'my-module' (il sera affiché dans le message de log). Par défaut, aucun nom de module n'est défini.
 
 Logger.add_target("data.log", Levels.DEBUG) # Ajoute une nouvelle cible au logger (cela enregistrera tous les messages avec un niveau supérieur à DEBUG dans le fichier 'data.log')
 ```
 
-> Veuillez noter que le logger peut être utilisé sans aucune configuration manuelle. La configuration par défaut est la suivante :
-> - target : terminal
->   - level : `INFO`
-> - module name : `None`
-
-> Notez que le nom du module est défini uniquement pour le fichier en cours. Si vous souhaitez définir le nom du module pour tous les fichiers, vous devez le faire dans chaque fichier.
+Le nom du module est défini uniquement pour le fichier en cours. Si vous souhaitez définir le nom du module pour tous les fichiers, vous devez le faire dans chaque fichier.
