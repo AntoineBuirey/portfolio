@@ -6,7 +6,6 @@ const { title, condition } = Astro.props as {
     condition?: boolean;
 };
 
-console.log(`Label: ${title}, condition: ${condition}`);
 ---
 {(condition == undefined || condition) ? (
     <div class="label">

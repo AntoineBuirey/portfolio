@@ -24,8 +24,6 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 
 const formattedDate = formatDate(project.data.date);
-
-console.log(project.data);
 ---
 <html lang="fr">
 	<Head page={project.data.title} />

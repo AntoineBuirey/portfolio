@@ -15,12 +15,10 @@ const id = Math.random().toString(36).substring(2, 15);
     // Asynchronous download of PDF
     var loadingTask = pdfjsLib.getDocument({ url });
     loadingTask.promise.then(function(pdf) {
-        console.log('PDF loaded');
 
         // Fetch the first page
         var pageNumber = 1;
         pdf.getPage(pageNumber).then(function(page) {
-        console.log('Page loaded');
 
         var scale = 1.5;
         var viewport = page.getViewport({scale: scale});
@@ -43,10 +41,7 @@ const id = Math.random().toString(36).substring(2, 15);
             viewport: viewport,
             transform: [resolution, 0, 0, resolution, 0, 0]
         };
-        var renderTask = page.render(renderContext);
-        renderTask.promise.then(function () {
-            console.log('Page rendered');
-        });
+        page.render(renderContext);
         });
     }, function (reason) {
         // PDF loading error
